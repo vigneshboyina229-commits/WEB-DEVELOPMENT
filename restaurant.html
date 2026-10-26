@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurant and Cafe Website</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Georgia;
+}
+body {
+background-color: floralwhite;
+color: darkslategray;
+}
+.header {
+background-color: maroon;
+color: white;
+padding: 20px;
+text-align: center;
+}
+.header h1 {
+margin-bottom: 8px;
+}
+.nav {
+background-color: darkred;
+padding: 12px;
+text-align: center;
+}
+.nav a {
+color: white;
+text-decoration: none;
+margin: 0 15px;
+}
+.welcome {
+background-color: lightyellow;
+padding: 30px;
+margin: 20px;
+text-align: center;
+border-radius: 10px;
+}
+welcome h2 {
+color: maroon;
+margin-bottom: 10px;
+}
+.menu {
+padding: 0 20px;
+}
+.menu h2 {
+color: maroon;
+margin-bottom: 15px;
+text-align: center;
+}
+.menu-container {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+.menu-card {
+background-color: white;
+padding: 20px;
+border-radius: 10px;
+text-align: center;
+}
+.menu-card h3 {
+color: maroon;
+margin-bottom: 8px;
+}
+.menu-card p {
+margin-bottom: 10px;
+}
+.price {
+color: green;
+font-weight: bold;
+font-size: 18px;
+}
+.chef {
+background-color: mistyrose;
+padding: 20px;
+margin: 20px;
+border-radius: 10px;
+}
+.chef h2 {
+color: maroon;
+margin-bottom: 15px;
+text-align: center;
+}
+.chef-container {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+.chef-card {
+background-color: white;
+padding: 15px;
+text-align: center;
+border-radius: 10px;
+}
+.chef-image {
+height: 120px;
+background-color: lightgray;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 10px;
+color: maroon;
+font-weight: bold;
+}
+.ambience {
+background-color: white;
+padding: 20px;
+margin: 20px;
+border-radius: 10px;
+text-align: center;
+}
+.ambience h2 {
+color: maroon;
+margin-bottom: 10px;
+}
+.testimonials {
+background-color: lavenderblush;
+padding: 20px;
+margin: 20px;
+border-radius: 10px;
+}
+.testimonials h2 {
+color: maroon;
+text-align: center;
+margin-bottom: 15px;
+}
+.testimonial-container {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+.testimonial {
+background-color: white;
+padding: 15px;
+border-radius: 10px;
+text-align: center;
+}
+.reservation {
+background-color: white;
+padding: 20px;
+margin: 20px;
+border-radius: 10px;
+}
+.reservation h2 {
+color: maroon;
+margin-bottom: 15px;
+text-align: center;
+}
+.reservation-form {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+}
+.reservation-form input,
+.reservation-form select,
+.reservation-form button {
+padding: 12px;
+border: 1px solid lightgray;
+border-radius: 5px;
+}
+.reservation-form button {
+background-color: maroon;
+color: white;
+border: none;
+}
+.info {
+background-color: beige;
+padding: 20px;
+margin: 20px;
+border-radius: 10px;
+text-align: center;
+}
+.info h2 {
+color: maroon;
+margin-bottom: 10px;
+}
+.footer {
+background-color: maroon;
+color: white;
+text-align: center;
+padding: 15px;
+margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>Spice Garden Restaurant</h1>
+<p>Delicious Food | Great Taste | Happy Moments</p>
+</div>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Menu</a>
+<a href="#">Chefs</a>
+<a href="#">Reservation</a>
+<a href="#">Contact</a>
+</div>
+<div class="welcome">
+<h2>Welcome to Spice Garden</h2>
+<p>Enjoy delicious food prepared with fresh ingredients in a comfortable atmosphere.</p>
+</div>
+<div class="menu">
+<h2>Our Menu</h2>
+<div class="menu-container">
+<div class="menu-card">
+<h3>Paneer Tikka</h3>
+<p>Grilled paneer with spices and vegetables.</p>
+<p class="price">₹220</p>
+</div>
+<div class="menu-card">
+<h3>Chicken Biryani</h3>
+<p>Traditional biryani with aromatic rice and spices.</p>
+<p class="price">₹280</p>
+</div>
+<div class="menu-card">
+<h3>Veg Pizza</h3>
+<p>Fresh vegetables with cheese and special sauce.</p>
+<p class="price">₹250</p>
+</div>
+<div class="menu-card">
+<h3>Masala Dosa</h3>
+<p>Crispy dosa served with chutney and sambar.</p>
+<p class="price">₹120</p>
+</div>
+<div class="menu-card">
+<h3>Chocolate Brownie</h3>
+<p>Soft chocolate brownie served with ice cream.</p>
+<p class="price">₹150</p>
+</div>
+<div class="menu-card">
+<h3>Fresh Lime Soda</h3>
+<p>Refreshing lime drink with a sweet and sour taste.</p>
+<p class="price">₹80</p>
+</div>
+</div>
+</div>
+<div class="chef">
+<h2>Meet Our Chefs</h2>
+<div class="chef-container">
+<div class="chef-card">
+<div class="chef-image">
+Chef Photo
+</div>
+<h3>Chef Arjun</h3>
+<p>Head Chef</p>
+<p>Specialist in Indian and traditional dishes.</p>
+</div>
+<div class="chef-card">
+<div class="chef-image">
+Chef Photo
+</div>
+<h3>Chef Priya</h3>
+<p>Pastry Chef</p>
+<p>Specialist in desserts and bakery items.</p>
+</div>
+<div class="chef-card">
+<div class="chef-image">
+Chef Photo
+</div>
+<h3>Chef Rahul</h3>
+<p>Continental Chef</p>
+<p>Specialist in pizzas, pasta and continental food.</p>
+</div>
+</div>
+</div>
+<div class="ambience">
+<h2>Restaurant Ambience</h2>
+<p>Our restaurant provides a clean, peaceful and comfortable environment for families, friends and special occasions.</p>
+<br>
+<p>Enjoy soft lighting, comfortable seating and pleasant music while having your favourite food.</p>
+</div>
+<div class="testimonials">
+<h2>Customer Testimonials</h2>
+<div class="testimonial-container">
+<div class="testimonial">
+<p>"The food was very tasty and the service was excellent."</p>
+<br>
+<h4>- Ananya</h4>
+</div>
+<div class="testimonial">
+<p>"A perfect place for family dinner. The ambience is very nice."</p>
+<br>
+<h4>- Rahul</h4>
+</div>
+<div class="testimonial">
+<p>"Loved the biryani and desserts. Will visit again."</p>
+<br>
+<h4>- Sneha</h4>
+</div>
+</div>
+</div>
+<div class="reservation">
+<h2>Table Reservation</h2>
+<div class="reservation-form">
+<input type="text" placeholder="Your Name">
+<input type="text" placeholder="Phone Number">
+<input type="date">
+<input type="time">
+<select>
+<option>Number of Guests</option>
+<option>1 Guest</option>
+<option>2 Guests</option>
+<option>3 Guests</option>
+<option>4 Guests</option>
+<option>5+ Guests</option>
+</select>
+<select>
+<option>Choose Table</option>
+<option>Indoor Table</option>
+<option>Outdoor Table</option>
+<option>Family Table</option>
+</select>
+<button>Reserve Table</button>
+</div>
+</div>
+<div class="info">
+<h2>Opening Hours & Location</h2>
+<p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+<p>Saturday - Sunday: 10:00 AM - 11:00 PM</p>
+<br>
+<p>Location: Beach Road, Visakhapatnam, Andhra Pradesh</p>
+<p>Phone: 98765 43210</p>
+</div>
+<div class="footer">
+<p>Spice Garden Restaurant | Taste the Happiness</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopSphere | Online Shopping</title>
+<style>
+:root {
+  --blue: #4263eb;
+  --light: #eef2ff;
+  --ink: #17243b;
+  --muted: #758198;
+  --line: #e8edf5;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fbfcff;
+  color: var(--ink);
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.container { width: min(1200px, 92%); margin: auto; }
+header {
+  background: #ffffffed;
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+}
+nav {
+  min-height: 75px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 18px;
+}
+.logo { font-size: 25px; font-weight: 800; color: var(--blue); }
+.search {
+  flex: 1; max-width: 430px;
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f7f8fc;
+}
+.search input { width: 100%; border: 0; outline: 0; background: transparent; }
+.nav-buttons { display: flex; gap: 8px; }
+.nav-buttons button {
+  background: white; border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px;
+}
+.nav-buttons button:hover { background: var(--light); }
+.hero {
+  margin: 25px auto;
+  padding: 45px;
+  border-radius: 24px;
+  background: linear-gradient(120deg,#eaf0ff,#f6efff);
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 25px;
+  overflow: hidden;
+}
+.hero h1 { font-size: clamp(32px,5vw,54px); margin: 12px 0; }
+.hero p { color: var(--muted); line-height: 1.7; }
+.hero img {
+  width: 40%; max-height: 250px; object-fit: contain;
+  border-radius: 20px;
+  animation: float 4s ease-in-out infinite;
+}
+.btn {
+  border: 0; border-radius: 10px;
+  padding: 12px 18px;
+  background: var(--blue); color: white;
+  transition: .25s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px #4263eb40; }
+h2 { margin-top: 32px; }
+.categories {
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 12px;
+}
+.category {
+  border: 1px solid var(--line); background: white;
+  border-radius: 14px; padding: 17px 8px;
+  transition: .25s;
+}
+.category:hover, .category.active {
+  background: var(--light); border-color: #aabaff;
+  transform: translateY(-3px);
+}
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; margin: 22px 0;
+}
+.toolbar input, .toolbar select {
+  padding: 11px; border: 1px solid var(--line);
+  border-radius: 10px; background: white;
+}
+.toolbar .spacer { flex: 1; }
+.products {
+  display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 17px;
+}
+.card {
+  position: relative; overflow: hidden;
+  background: white; border: 1px solid var(--line);
+  border-radius: 17px;
+  animation: appear .5s both;
+  transition: transform .25s, box-shadow .25s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px #20345c12; }
+.product-image {
+  height: 190px; display: grid; place-items: center;
+  background: linear-gradient(145deg,#f7f9ff,#edf2ff);
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%; height: 100%; object-fit: contain;
+  padding: 12px; transition: transform .4s;
+}
+.card:hover img { transform: scale(1.07); }
+.badge {
+  position: absolute; top: 12px; left: 12px;
+  background: #fff0f1; color: #e84c62;
+  padding: 5px 8px; border-radius: 7px;
+  font-size: 12px; font-weight: bold;
+}
+.wish {
+  position: absolute; right: 10px; top: 10px;
+  border: 1px solid var(--line); background: white;
+  border-radius: 50%; width: 34px; height: 34px;
+  color: #77839b; font-size: 18px;
+}
+.wish.active { color: #ef476f; }
+.details { padding: 14px; }
+.rating { color: #f4a900; font-size: 13px; }
+.details h3 { font-size: 15px; margin: 9px 0; }
+.description {
+  font-size: 12px; color: var(--muted);
+  min-height: 34px; line-height: 1.5;
+}
+.price { font-size: 19px; font-weight: 800; }
+.old {
+  color: #9ba4b4; text-decoration: line-through;
+  font-size: 12px; margin-left: 6px;
+}
+.add {
+  width: 100%; margin-top: 12px;
+  padding: 10px; border: 1px solid #dce5ff;
+  border-radius: 9px; background: var(--light);
+  color: var(--blue); font-weight: bold;
+}
+.add:hover { background: var(--blue); color: white; }
+.promo {
+  margin: 35px 0; padding: 28px;
+  background: linear-gradient(110deg,#eaf1ff,#f7f2ff);
+  border-radius: 18px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 15px;
+}
+footer {
+  padding: 30px 0; margin-top: 35px;
+  background: white; border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+footer .container {
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; gap: 20px;
+}
+.cart-panel {
+  position: fixed; right: -440px; top: 0;
+  width: min(420px,100%); height: 100vh;
+  background: white; z-index: 30;
+  box-shadow: -10px 0 40px #17243b20;
+  padding: 22px; overflow-y: auto;
+  transition: right .3s;
+}
+.cart-panel.open { right: 0; }
+.cart-header {
+  display: flex; justify-content: space-between;
+  align-items: center;
+}
+.cart-row {
+  display: flex; gap: 12px; align-items: center;
+  padding: 15px 0; border-bottom: 1px solid var(--line);
+}
+.cart-row img {
+  width: 65px; height: 65px;
+  object-fit: contain; background: var(--light);
+  border-radius: 10px;
+}
+.cart-row .info { flex: 1; }
+.cart-row button { padding: 5px 9px; }
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: #17243b66; z-index: 20;
+}
+.overlay.open { display: block; }
+.toast {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translate(-50%,20px);
+  opacity: 0; background: var(--ink); color: white;
+  padding: 12px 18px; border-radius: 10px;
+  transition: .25s; pointer-events: none; z-index: 50;
+}
+.toast.show { opacity: 1; transform: translate(-50%,0); }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media(max-width:900px) {
+  .products { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .categories { grid-template-columns: repeat(3,1fr); }
+}
+@media(max-width:600px) {
+  nav { flex-wrap: wrap; padding: 12px 0; }
+  .logo { font-size: 21px; }
+  .search { order: 3; flex-basis: 100%; max-width: none; }
+  .hero { padding: 25px; flex-direction: column; align-items: flex-start; }
+  .hero img { width: 100%; height: 140px; }
+  .products { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .product-image { height: 140px; }
+  .details { padding: 10px; }
+  .details h3 { font-size: 13px; }
+  .categories { grid-template-columns: repeat(3,1fr); }
+  .promo { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#">◈ ShopSphere</a>
+      <label class="search">
+        <input id="search" type="search" placeholder="Search products...">
+      </label>
+      <div class="nav-buttons">
+        <button id="wishButton">♡ <span id="wishCount">0</span></button>
+        <button id="cartButton">🛒 <span id="cartCount">0</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <span style="color:#4263eb;font-weight:bold">✦ THE BIG SHOPPING EVENT</span>
+      <h1>Upgrade your<br>everyday lifestyle.</h1>
+      <p>Discover amazing products at prices you'll love.</p>
+      <button class="btn" onclick="document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">Shop now →</button>
+    </div>
+    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=85" alt="Wireless headphones">
+  </section>
+
+  <section id="categorySection">
+    <h2>Shop by category</h2>
+    <div class="categories" id="categories"></div>
+  </section>
+
+  <section id="shop">
+    <h2>Trending products</h2>
+    <div class="toolbar">
+      <span id="resultCount">Products</span>
+      <span class="spacer"></span>
+      <select id="sort">
+        <option value="featured">Featured</option>
+        <option value="low">Price: Low to high</option>
+        <option value="high">Price: High to low</option>
+        <option value="rating">Top rated</option>
+      </select>
+    </div>
+    <div class="products" id="products"></div>
+  </section>
+
+  <section class="promo">
+    <div>
+      <h2 style="margin-top:0">A little extra for you!</h2>
+      <p>Enjoy a special offer on your next favourite find.</p>
+    </div>
+    <button class="btn" id="offerButton">Copy code: SHOP10</button>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div><strong style="color:#4263eb;font-size:20px">◈ ShopSphere</strong><p>Better choices. Brighter days.</p></div>
+    <div><strong>Customer care</strong><p>Shipping · Returns · Support</p></div>
+    <div><strong>© 2026 ShopSphere</strong><p>Demo online shopping website</p></div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h2>Your shopping cart</h2>
+    <button id="closeCart">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <hr>
+  <h3>Total: <span id="cartTotal">₹0</span></h3>
+  <button class="btn" style="width:100%" id="checkout">Proceed to checkout →</button>
+  <p style="color:#758198;font-size:12px">Demo checkout. No payment is collected.</p>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  {id:1,name:"Wireless Headphones",category:"Electronics",price:2499,old:3999,rating:4.8,discount:38,image:"photo-1505740420928-5e560c06d30e",description:"Enjoy immersive audio and comfortable listening."},
+  {id:2,name:"Classic Sneakers",category:"Fashion",price:1899,old:2999,rating:4.6,discount:37,image:"photo-1542291026-7eec264c27ff",description:"Everyday comfort with a modern, sporty look."},
+  {id:3,name:"Smart Watch",category:"Electronics",price:3299,old:4999,rating:4.5,discount:34,image:"photo-1523275335684-37898b6baf30",description:"Track activity and stay connected throughout the day."},
+  {id:4,name:"Travel Backpack",category:"Fashion",price:1499,old:2199,rating:4.4,discount:32,image:"photo-1553062407-98eeb64c6a62",description:"A versatile bag with practical everyday storage."},
+  {id:5,name:"Skin Care Set",category:"Beauty",price:999,old:1499,rating:4.7,discount:33,image:"photo-1608248543803-ba4f8c70ae0b",description:"A simple routine for fresh, hydrated-looking skin."},
+  {id:6,name:"Ceramic Table Lamp",category:"Home",price:1799,old:2499,rating:4.5,discount:28,image:"photo-1507473885765-e6ed057f782c",description:"Add a warm glow and modern style to your room."},
+  {id:7,name:"Steel Water Bottle",category:"Sports",price:699,old:999,rating:4.3,discount:30,image:"photo-1602143407151-7111542de6e8",description:"Reusable hydration for work, workouts and travel."},
+  {id:8,name:"Gaming Keyboard",category:"Electronics",price:2799,old:3999,rating:4.7,discount:30,image:"photo-1587829741301-dc798b83add3",description:"Responsive keys for work, creativity and gaming."},
+  {id:9,name:"Soft Throw Blanket",category:"Home",price:1299,old:1899,rating:4.6,discount:32,image:"photo-1600210492486-724fe5c67fb0",description:"A cosy addition to your favourite space."},
+  {id:10,name:"Classic Sunglasses",category:"Fashion",price:899,old:1399,rating:4.2,discount:36,image:"photo-1511499767150-a48a237f0083",description:"Timeless everyday style for sunny days."},
+  {id:11,name:"Bluetooth Speaker",category:"Electronics",price:1599,old:2299,rating:4.5,discount:30,image:"photo-1608043152269-423dbba4e7e1",description:"Portable sound for your desk or weekend trips."},
+  {id:12,name:"Decorative Plant",category:"Home",price:549,old:799,rating:4.4,discount:31,image:"photo-1485955900006-10f4d324d411",description:"Bring a little greenery to your home or desk."}
+];
+
+const categories = ["All","Electronics","Fashion","Home","Beauty","Sports"];
+let activeCategory = "All";
+let wishlist = new Set();
+let cart = {};
+let showWishlist = false;
+
+const $ = selector => document.querySelector(selector);
+const money = value => "₹" + value.toLocaleString("en-IN");
+
+function notify(message) {
+  const toast = $("#toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer = setTimeout(() => toast.classList.remove("show"),2200);
+}
+
+function renderCategories() {
+  $("#categories").innerHTML = categories.map(category => `
+    <button class="category ${activeCategory===category?"active":""}" data-category="${category}">
+      <div style="font-size:26px;margin-bottom:8px">${({
+        All:"✨",Electronics:"🎧",Fashion:"👟",Home:"🏡",Beauty:"🌷",Sports:"🏃"
+      })[category]}</div>
+      <strong>${category==="All"?"All products":category}</strong>
+      <div style="font-size:11px;color:#758198;margin-top:4px">
+        ${category==="All"?products.length:products.filter(p=>p.category===category).length} items
+      </div>
+    </button>`).join("");
+
+  document.querySelectorAll("[data-category]").forEach(button => {
+    button.onclick = () => {
+      activeCategory = button.dataset.category;
+      showWishlist = false;
+      renderCategories();
+      renderProducts();
+    };
+  });
+}
+
+function renderProducts() {
+  const query = $("#search").value.trim().toLowerCase();
+  let list = products.filter(p =>
+    (activeCategory==="All" || p.category===activeCategory) &&
+    (p.name+" "+p.category+" "+p.description).toLowerCase().includes(query) &&
+    (!showWishlist || wishlist.has(p.id))
+  );
+
+  const sort = $("#sort").value;
+  if(sort==="low") list.sort((a,b)=>a.price-b.price);
+  if(sort==="high") list.sort((a,b)=>b.price-a.price);
+  if(sort==="rating") list.sort((a,b)=>b.rating-a.rating);
+
+  $("#resultCount").textContent = `${list.length} products`;
+
+  $("#products").innerHTML = list.length ? list.map((p,i)=>`
+    <article class="card" style="animation-delay:${i*35}ms">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/${p.image}?auto=format&fit=crop&w=500&q=80"
+          alt="${p.name}" loading="lazy"
+          onerror="this.style.display='none'">
+      </div>
+      <span class="badge">-${p.discount}% OFF</span>
+      <button class="wish ${wishlist.has(p.id)?"active":""}" data-wish="${p.id}" aria-label="Add to wishlist">
+        ${wishlist.has(p.id)?"♥":"♡"}
+      </button>
+      <div class="details">
+        <div class="rating">★★★★★ <span style="color:#758198">${p.rating}</span></div>
+        <h3>${p.name}</h3>
+        <p class="description">${p.description}</p>
+        <div><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span></div>
+        <button class="add" data-add="${p.id}">＋ Add to cart</button>
+      </div>
+    </article>`).join("") :
+    `<div style="grid-column:1/-1;text-align:center;padding:45px">
+      <h3>No products found</h3><p>Try another search or category.</p>
+      <button class="btn" onclick="resetFilters()">Show all products</button>
+    </div>`;
+
+  document.querySelectorAll("[data-add]").forEach(button =>
+    button.onclick = () => addToCart(+button.dataset.add)
+  );
+  document.querySelectorAll("[data-wish]").forEach(button =>
+    button.onclick = () => toggleWishlist(+button.dataset.wish)
+  );
+}
+
+function resetFilters() {
+  activeCategory = "All";
+  showWishlist = false;
+  $("#search").value = "";
+  $("#sort").value = "featured";
+  renderCategories();
+  renderProducts();
+}
+
+function toggleWishlist(id) {
+  if(wishlist.has(id)) wishlist.delete(id);
+  else wishlist.add(id);
+  $("#wishCount").textContent = wishlist.size;
+  renderProducts();
+  notify(wishlist.has(id)?"Added to wishlist":"Removed from wishlist");
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  renderCart();
+  notify("Product added to cart!");
+}
+
+function updateQuantity(id,amount) {
+  cart[id] = (cart[id] || 0) + amount;
+  if(cart[id] <= 0) delete cart[id];
+  renderCart();
+}
+
+function renderCart() {
+  const ids = Object.keys(cart).map(Number);
+  const count = ids.reduce((sum,id)=>sum+cart[id],0);
+  const total = ids.reduce((sum,id)=>
+    sum + products.find(p=>p.id===id).price*cart[id],0
+  );
+
+  $("#cartCount").textContent = count;
+  $("#cartTotal").textContent = money(total);
+
+  $("#cartItems").innerHTML = ids.length ? ids.map(id => {
+    const p = products.find(item=>item.id===id);
+    return `<div class="cart-row">
+      <img src="https://images.unsplash.com/${p.image}?auto=format&fit=crop&w=150&q=70" alt="">
+      <div class="info"><strong>${p.name}</strong><p>${money(p.price)}</p>
+        <button data-minus="${id}">−</button> ${cart[id]} <button data-plus="${id}">+</button>
+      </div>
+      <button data-remove="${id}" aria-label="Remove">✕</button>
+    </div>`;
+  }).join("") : "<p>Your cart is empty. Add a product to get started!</p>";
+
+  document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>updateQuantity(+b.dataset.minus,-1));
+  document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>updateQuantity(+b.dataset.plus,1));
+  document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{
+    delete cart[+b.dataset.remove];
+    renderCart();
+  });
+}
+
+function openCart() {
+  $("#cartPanel").classList.add("open");
+  $("#overlay").classList.add("open");
+}
+function closeCart() {
+  $("#cartPanel").classList.remove("open");
+  $("#overlay").classList.remove("open");
+}
+
+$("#search").addEventListener("input",()=>{
+  showWishlist=false;
+  renderProducts();
+});
+$("#sort").onchange = renderProducts;
+
+$("#wishButton").onclick = () => {
+  showWishlist = !showWishlist;
+  activeCategory = "All";
+  renderCategories();
+  renderProducts();
+  $("#shop").scrollIntoView({behavior:"smooth"});
+};
+
+$("#cartButton").onclick = openCart;
+$("#closeCart").onclick = closeCart;
+$("#overlay").onclick = closeCart;
+
+$("#offerButton").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText("SHOP10");
+    notify("Offer code SHOP10 copied!");
+  } catch {
+    notify("Use offer code SHOP10");
+  }
+};
+
+$("#checkout").onclick = () => {
+  if(!Object.keys(cart).length) {
+    notify("Your cart is empty!");
+    return;
+  }
+  notify("Demo checkout: connect a backend to accept orders.");
+};
+
+renderCategories();
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
